@@ -102,8 +102,4 @@ int main()
 
 	//DailyBalance
 	dailyBalance();
-
-	//CreateFoodFile and CreateWorkoutFile
-	//createFoodFile();
-	//createWorkoutFile();
 }
