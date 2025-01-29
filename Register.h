@@ -139,6 +139,20 @@ void choosePlan()
     }
 }
 
+void dataInVectors()
+{
+    usernames.push_back(username);
+    passwords.push_back(password);
+    ages.push_back(age);
+    genders.push_back(gender);
+    heights.push_back(height);
+    weights.push_back(weight);
+    activities.push_back(activity);
+    goals.push_back(goal);
+    plans.push_back(plan);
+    velocities.push_back(velocity);
+}
+
 void signIn()
 {
     cout << "Enter username: (At least 4 characters and no more than 20 characters)" << endl;
@@ -187,9 +201,20 @@ void signIn()
     outfile << username << " " << password << " " << age << " " << gender << " " << height << " "
         << weight << " " << activity << " " << goal << " " << plan << " " << velocity << endl;
 
+    ofstream personalfile(username + ".txt", ios::app);
+    if (!personalfile.is_open())
+    {
+        fileProblem();
+    }
+    personalfile << username << " " << password << " " << age << " " << gender << " " << height << " "
+        << weight << " " << activity << " " << goal << " " << plan << " " << velocity;
+
+    dataInVectors();
+
     cout << "Your account is registered!" << endl;
     cout << endl;
     outfile.close();
+    personalfile.close();
 }
 
 bool corectLogIn()
@@ -250,7 +275,8 @@ void startForm()
     else if (answer == 'e')
     {
         cout << "Goodbye :)" << endl;
-        return;
+        cout << endl;
+        startForm();
     }
     else
     {
@@ -260,9 +286,21 @@ void startForm()
     }
 }
 
+int findTheIndexForVectors(string username)
+{
+    for (int i = 0; i <= usernames.size(); i++)
+    {
+        if (usernames[i] == username)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void displayAccountData()
 {
-    ifstream infile("accounts.txt");
+    ifstream infile(username + ".txt");
     string u, p;
     unsigned a, h, w;
     char g, act, go, pl;
@@ -298,4 +336,153 @@ void displayAccountData()
     }
     cout << endl;
     infile.close();
+}
+
+void changes()
+{
+    cout << "Do you want to make changes to your personal data? (y/n)" << endl;
+    char change = ' ';
+    cin >> change;
+    if (change == 'y')
+    {
+        cout << endl;
+        cout << "What do you want to change? (choose number between 1 and 7)" << endl;
+        cout << "1 - age" << endl;
+        cout << "2 - gender" << endl;
+        cout << "3 - height" << endl;
+        cout << "4 - weight" << endl;
+        cout << "5 - activity" << endl;
+        cout << "6 - goal" << endl;
+        cout << "7 - plan" << endl;
+        unsigned answer = 0;
+        cin >> answer;
+        if (answer < 1 && answer > 7)
+        {
+            invalidData();
+            changes();
+        }
+        
+        ifstream infile(username + ".txt");
+        string u, p;
+        unsigned a, h, w;
+        char g, act, go, pl;
+        double v;
+
+        if (!infile.is_open())
+        {
+            fileProblem();
+        }
+
+        while (infile >> u >> p >> a >> g >> h >> w >> act >> go >> pl >> v)
+        {
+            username = u;
+            password = p;
+            if (answer == 1)
+            {
+                enterAge();
+                gender = g;
+                height = h;
+                weight = w;
+                activity = act;
+                goal = go;
+                plan = pl;
+                velocity = v;
+            }
+            else if (answer == 2)
+            {
+                enterGender();
+                age = a;
+                height = h;
+                weight = w;
+                activity = act;
+                goal = go;
+                plan = pl;
+                velocity = v;
+            }
+            else if (answer == 3)
+            {
+                enterHeight();
+                age = a;
+                gender = g;
+                weight = w;
+                activity = act;
+                goal = go;
+                plan = pl;
+                velocity = v;
+            }
+            else if (answer == 4)
+            {
+                enterWeight();
+                age = a;
+                gender = g;
+                height = h;
+                activity = act;
+                goal = go;
+                plan = pl;
+                velocity = v;
+            }
+            else if (answer == 5)
+            {
+                enterActivity();
+                age = a;
+                gender = g;
+                height = h;
+                weight = w;
+                goal = go;
+                plan = pl;
+                velocity = v;
+            }
+            else if (answer == 6)
+            {
+                enterGoals();
+                age = a;
+                gender = g;
+                height = h;
+                weight = w;
+                activity = act;
+                plan = pl;
+                velocity = v;
+            }
+            else if (answer == 7)
+            {
+                choosePlan();
+                age = a;
+                gender = g;
+                height = h;
+                weight = w;
+                activity = act;
+                goal = go;
+                velocity = v;
+            }
+        }
+        infile.close();
+
+        remove((username + ".txt").c_str());
+        ofstream personalfile(username + ".txt", ios::app);
+        if (!personalfile.is_open())
+        {
+            fileProblem();
+        }
+        personalfile << username << " " << password << " " << age << " " << gender << " " << height << " "
+            << weight << " " << activity << " " << goal << " " << plan << " " << velocity;
+
+        dataInVectors();
+        personalfile.close();
+
+        cout << endl;
+        cout << "Changes are saved!" << endl;
+        cout << endl;
+
+        displayAccountData();
+    }
+    else if (change == 'n')
+    {
+        return;
+    }
+    else
+    {
+        invalidData();
+        changes();
+    }
+    cout << endl;
 }
