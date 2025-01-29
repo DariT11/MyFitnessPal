@@ -126,6 +126,17 @@ void caloriesDataInVectors()
     bmrValues.push_back(bmr);
 }
 
+void saveCalInFile(unsigned cal)
+{
+    ofstream personalFile(username + "calories.txt");
+    if (!personalFile.is_open())
+    {
+        fileProblem();
+    }
+    personalFile << cal;
+    personalFile.close();
+}
+
 void recommendedCaloriesIntake()
 {
     ifstream infile(username + ".txt");
@@ -197,6 +208,7 @@ void recommendedCaloriesIntake()
 
     calories = recCal;
     caloriesDataInVectors();
+    saveCalInFile(recCal);
     
     cout << endl;
     cout << "*1 kg body weight = 7700 cal!" << endl;
@@ -207,28 +219,32 @@ void recommendedCaloriesIntake()
         cout << "Warning:"
             << "This recommended calorie intake is tailored to your goals"
             << " but it may not be safe for your health." << endl;
+        cout << endl;
         changes();
+        recommendedCaloriesIntake();
     }
 }
 
-void saveRecCalInFile()
+unsigned readCalFromFile()
 {
-    ofstream personalfile(username + "calories.txt", ios::app);
-    if (!personalfile.is_open())
+    ifstream personalFile(username + "calories.txt");
+    if (!personalFile.is_open())
     {
-        return fileProblem();
+        fileProblem();
     }
-    personalfile << " " << recCal << endl;
+    unsigned cal = 0;
+    personalFile >> cal;
+    personalFile.close();
+
+    return cal;
 }
 
-/*void saveCurrCal()
+void changeCal()
 {
-    //unsigned currCal = calories;
-
-    ofstream personalfile(username + ".txt", ios::app);
-
-    if()
-}*/
+    unsigned currCal = readCalFromFile();
+    unsigned newCal = calories;
+    saveCalInFile(newCal);
+}
 
 void dailyBalance()
 {
@@ -242,6 +258,7 @@ void dailyBalance()
     if (answer == 'f')
     {
         addFood();
+        changeCal();
         displayFoods();
         displayWorkouts();
         logOut();
@@ -250,6 +267,7 @@ void dailyBalance()
     else if(answer == 'w')
     {
         addWorkout();
+        changeCal();
         displayFoods();
         displayWorkouts();
         logOut();
