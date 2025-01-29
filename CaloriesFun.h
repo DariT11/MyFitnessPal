@@ -96,7 +96,7 @@ void displayMacros(unsigned pC, unsigned fC, unsigned cC, unsigned pG, unsigned 
 {
     cout << "Protein: " << pC << " cal and " << pG << " g" << endl;
     cout << "Fat: " << fC << " cal and " << fG << " g" << endl;
-    cout << "Crabs: " << cC << " cal and " << cG << " g" << endl;
+    cout << "Carbs: " << cC << " cal and " << cG << " g" << endl;
 }
 
 unsigned defOrEx(double v)
@@ -119,9 +119,16 @@ unsigned defOrEx(double v)
     }
 }
 
+void caloriesDataInVectors()
+{
+    recCals.push_back(recCal);
+    dailyCalories.push_back(calories);
+    bmrValues.push_back(bmr);
+}
+
 void recommendedCaloriesIntake()
 {
-    ifstream infile("accounts.txt");
+    ifstream infile(username + ".txt");
     if (!infile.is_open())
     {
         fileProblem();
@@ -158,44 +165,74 @@ void recommendedCaloriesIntake()
                 if (go == 'l')
                 {
                     deficit = defOrEx(v);
-                    calories = bmr * activityCoef - deficit;
+                    recCal = bmr * activityCoef - deficit;
                 }
                 else
                 {
                     excess = defOrEx(v);
-                    calories = bmr * activityCoef + excess;
+                    recCal = bmr * activityCoef + excess;
                 }
             }
             else
             {
-                calories = bmr * activityCoef;
+                recCal = bmr * activityCoef;
             }
 
-            cout << "Calories: " << (int)calories << " cal per day" << endl;
+            cout << "Calories: " << (int)recCal << " cal per day" << endl;
             cout << endl;
 
             if (pl == 'p')
             {
-                protein = proteinCal(go, calories);
-                fat = fatCal(go, calories);
-                carbs = carbsCal(go, calories);
-                proteinG = proteinGrams(go, calories);
-                fatG = fatGrams(go, calories);
-                carbsG = carbsGrams(go, calories);
+                protein = proteinCal(go, recCal);
+                fat = fatCal(go, recCal);
+                carbs = carbsCal(go, recCal);
+                proteinG = proteinGrams(go, recCal);
+                fatG = fatGrams(go, recCal);
+                carbsG = carbsGrams(go, recCal);
                 displayMacros(protein, fat, carbs, proteinG, fatG, carbsG);
             }
         }
     }
+    infile.close();
 
-    recCal = calories;
+    calories = recCal;
+    caloriesDataInVectors();
+    
     cout << endl;
     cout << "*1 kg body weight = 7700 cal!" << endl;
     cout << endl;
-    infile.close();
+
+    if (recCal < 1200)
+    {
+        cout << "Warning:"
+            << "This recommended calorie intake is tailored to your goals"
+            << " but it may not be safe for your health." << endl;
+        changes();
+    }
 }
+
+void saveRecCalInFile()
+{
+    ofstream personalfile(username + "calories.txt", ios::app);
+    if (!personalfile.is_open())
+    {
+        return fileProblem();
+    }
+    personalfile << " " << recCal << endl;
+}
+
+/*void saveCurrCal()
+{
+    //unsigned currCal = calories;
+
+    ofstream personalfile(username + ".txt", ios::app);
+
+    if()
+}*/
 
 void dailyBalance()
 {
+    cout << "Recommended calories: " << recCal << endl;
     cout << "Daily Balance: " << calories << " " << endl;
     cout << endl;
     cout << "Do you want to add food or workout: (f/w)" << endl;
@@ -218,6 +255,11 @@ void dailyBalance()
         logOut();
         dailyBalance();
     }
-    
+    else
+    {
+        invalidData();
+        dailyBalance();
+        cout << endl;
+    } 
     cout << endl;
 }
