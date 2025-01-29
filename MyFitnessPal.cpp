@@ -11,6 +11,29 @@ unsigned age, height, weight, recCal, calories, food, workout;
 char gender, plan, activity, goal;
 double bmr, velocity; 
 
+//Create vector for each global variable
+vector<string> usernames;
+vector<string> passwords;
+vector<unsigned> ages;
+vector<unsigned> heights;
+vector<unsigned> weights;
+vector<unsigned> recCals;
+vector<unsigned> dailyCalories;
+vector<unsigned> foods;
+vector<unsigned> workouts;
+vector<char> genders;
+vector<char> plans;
+vector<char> activities;
+vector<char> goals;
+vector<double> bmrValues;
+vector<double> velocities;
+
+/*void createFile()
+{
+	ofstream outfile("accounts.txt", ios::app);
+	outfile.close();
+}*/
+
 void invalidData()
 {
     cout << "Invalid input! Try again!" << endl;
@@ -42,9 +65,11 @@ void logOut()
 	{
 		invalidData();
 	}
+	cout << endl;
 }
 
 #include "Food.h"
+#include "Workouts.h"
 #include "CaloriesFun.h"
 
 int main()
@@ -68,11 +93,17 @@ int main()
 
 	//LogOutOpp
 	logOut();
-	cout << endl;
+
+	//Settings
+	changes();
 
 	//RecommendedCalories
 	recommendedCaloriesIntake();
 
 	//DailyBalance
 	dailyBalance();
+
+	//CreateFoodFile and CreateWorkoutFile
+	//createFoodFile();
+	//createWorkoutFile();
 }
