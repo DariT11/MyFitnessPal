@@ -201,12 +201,12 @@ void signIn()
     outfile << username << " " << password << " " << age << " " << gender << " " << height << " "
         << weight << " " << activity << " " << goal << " " << plan << " " << velocity << endl;
 
-    ofstream personalfile(username + ".txt", ios::app);
-    if (!personalfile.is_open())
+    ofstream personalFile(username + ".txt", ios::app);
+    if (!personalFile.is_open())
     {
         fileProblem();
     }
-    personalfile << username << " " << password << " " << age << " " << gender << " " << height << " "
+    personalFile << username << " " << password << " " << age << " " << gender << " " << height << " "
         << weight << " " << activity << " " << goal << " " << plan << " " << velocity;
 
     dataInVectors();
@@ -214,7 +214,7 @@ void signIn()
     cout << "Your account is registered!" << endl;
     cout << endl;
     outfile.close();
-    personalfile.close();
+    personalFile.close();
 }
 
 bool corectLogIn()
@@ -458,16 +458,16 @@ void changes()
         infile.close();
 
         remove((username + ".txt").c_str());
-        ofstream personalfile(username + ".txt", ios::app);
-        if (!personalfile.is_open())
+        ofstream personalFile(username + ".txt", ios::app);
+        if (!personalFile.is_open())
         {
             fileProblem();
         }
-        personalfile << username << " " << password << " " << age << " " << gender << " " << height << " "
+        personalFile << username << " " << password << " " << age << " " << gender << " " << height << " "
             << weight << " " << activity << " " << goal << " " << plan << " " << velocity;
 
         dataInVectors();
-        personalfile.close();
+        personalFile.close();
 
         cout << endl;
         cout << "Changes are saved!" << endl;
