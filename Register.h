@@ -264,15 +264,15 @@ void startForm()
     cout << "Log in(l), Sign in(s) or Exit(e): " << endl;
     char answer = ' ';
     cin >> answer;
-    if (answer == 'l')
+    if (answer == 'l' || answer == 'L')
     {
         logIn();
     }
-    else if (answer == 's')
+    else if (answer == 's' || answer == 'S')
     {
         signIn();
     }
-    else if (answer == 'e')
+    else if (answer == 'e' || answer == 'E')
     {
         cout << "Goodbye :)" << endl;
         cout << endl;
@@ -477,6 +477,7 @@ void changes()
     }
     else if (change == 'n')
     {
+        cout << endl;
         return;
     }
     else
