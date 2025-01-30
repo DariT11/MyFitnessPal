@@ -137,6 +137,25 @@ void saveCalInFile(unsigned cal)
     personalFile.close();
 }
 
+unsigned readCalFromFile()
+{
+    ifstream personalFile(username + "calories.txt");
+    if (!personalFile.is_open())
+    {
+        fileProblem();
+    }
+    unsigned cal = 0;
+    personalFile >> cal;
+    personalFile.close();
+
+    return cal;
+}
+
+void saveCalFromLatestLogIn()
+{
+    calories = readCalFromFile();
+}
+
 void recommendedCaloriesIntake()
 {
     ifstream infile(username + ".txt");
@@ -163,7 +182,7 @@ void recommendedCaloriesIntake()
     unsigned fatG = 0;
     unsigned carbsG = 0;
    
-    cout << "Recommended caloric intake: " << endl;
+    cout << "Recommended caloric intake: ";
     while (infile >> u >> p >> a >> g >> h >> w >> act >> go >> pl >> v)
     {
         if (username == u)
@@ -189,7 +208,7 @@ void recommendedCaloriesIntake()
                 recCal = bmr * activityCoef;
             }
 
-            cout << "Calories: " << (int)recCal << " cal per day" << endl;
+            cout << (int)recCal << " cals per day" << endl;
             cout << endl;
 
             if (pl == 'p')
@@ -206,11 +225,17 @@ void recommendedCaloriesIntake()
     }
     infile.close();
 
-    calories = recCal;
+    if (!isItNewDay())
+    {
+        saveCalFromLatestLogIn();
+    }
+    else
+    {
+        calories = recCal;
+    }
     caloriesDataInVectors();
     saveCalInFile(recCal);
     
-    cout << endl;
     cout << "*1 kg body weight = 7700 cal!" << endl;
     cout << endl;
 
@@ -225,20 +250,6 @@ void recommendedCaloriesIntake()
     }
 }
 
-unsigned readCalFromFile()
-{
-    ifstream personalFile(username + "calories.txt");
-    if (!personalFile.is_open())
-    {
-        fileProblem();
-    }
-    unsigned cal = 0;
-    personalFile >> cal;
-    personalFile.close();
-
-    return cal;
-}
-
 void changeCal()
 {
     unsigned currCal = readCalFromFile();
@@ -248,10 +259,11 @@ void changeCal()
 
 void dailyBalance()
 {
+    //unsigned currCal = readCalFromFile()
     cout << "Recommended calories: " << recCal << endl;
     cout << "Daily Balance: " << calories << " " << endl;
     cout << endl;
-    cout << "Do you want to add food or workout: (f/w)" << endl;
+    cout << "Do you want to add food or workout: (f - food/w - workout/e - exit)" << endl;
     char answer = ' ';
     cin >> answer;
 
@@ -273,9 +285,15 @@ void dailyBalance()
         logOut();
         dailyBalance();
     }
+    else if (answer == 'e')
+    {
+        cout << endl;
+        logOut();
+    }
     else
     {
         invalidData();
+        cout << endl;
         dailyBalance();
         cout << endl;
     } 
