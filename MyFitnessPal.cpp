@@ -68,6 +68,7 @@ void logOut()
 	cout << endl;
 }
 
+#include "Calendar.h"
 #include "Food.h"
 #include "Workouts.h"
 #include "CaloriesFun.h"
