@@ -222,6 +222,11 @@ void recommendedCaloriesIntake()
                 displayMacros(protein, fat, carbs, proteinG, fatG, carbsG);
             }
         }
+        else
+        {
+            cout << "User not found!" << endl;
+            logOut();
+        }
     }
     infile.close();
 
@@ -259,7 +264,6 @@ void changeCal()
 
 void dailyBalance()
 {
-    //unsigned currCal = readCalFromFile()
     cout << "Recommended calories: " << recCal << endl;
     cout << "Daily Balance: " << calories << " " << endl;
     cout << endl;
@@ -274,6 +278,7 @@ void dailyBalance()
         displayFoods();
         displayWorkouts();
         logOut();
+        searchByDate();
         dailyBalance();
     }
     else if(answer == 'w')
@@ -283,6 +288,7 @@ void dailyBalance()
         displayFoods();
         displayWorkouts();
         logOut();
+        searchByDate();
         dailyBalance();
     }
     else if (answer == 'e')
