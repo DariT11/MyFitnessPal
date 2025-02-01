@@ -44,7 +44,7 @@ void fileProblem()
     cout << "This file can't be opened!" << endl;
 }
 
-#include "Register.h"
+#include "Register.hpp"
 
 void logOut()
 {
@@ -68,10 +68,10 @@ void logOut()
 	cout << endl;
 }
 
-#include "Calendar.h"
-#include "Food.h"
-#include "Workouts.h"
-#include "CaloriesFun.h"
+#include "Calendar.hpp"
+#include "Food.hpp"
+#include "Workouts.hpp"
+#include "CaloriesFun.hpp"
 
 int main()
 {
