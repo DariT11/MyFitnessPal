@@ -28,12 +28,6 @@ vector<char> goals;
 vector<double> bmrValues;
 vector<double> velocities;
 
-/*void createFile()
-{
-	ofstream outfile("accounts.txt", ios::app);
-	outfile.close();
-}*/
-
 void invalidData()
 {
     cout << "Invalid input! Try again!" << endl;
