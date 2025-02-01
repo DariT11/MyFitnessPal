@@ -14,7 +14,7 @@ string foodName;
 
 void addFood()
 {
-    ofstream foodFile("foods.txt", ios::app);
+    ofstream foodFile(username + "foods.txt", ios::app);
 
     if (!foodFile.is_open())
     {
@@ -47,7 +47,7 @@ void foodDataInVector()
 
 void displayFoods()
 {
-    ifstream infile("foods.txt");
+    ifstream infile(username + "foods.txt");
 
     if (!infile.is_open())
     {

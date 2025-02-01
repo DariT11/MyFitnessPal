@@ -128,7 +128,7 @@ void caloriesDataInVectors()
 
 void saveCalInFile(unsigned cal)
 {
-    ofstream personalFile(username + "calories.txt");
+    ofstream personalFile(username + today + "calories.txt");
     if (!personalFile.is_open())
     {
         fileProblem();
@@ -139,7 +139,7 @@ void saveCalInFile(unsigned cal)
 
 unsigned readCalFromFile()
 {
-    ifstream personalFile(username + "calories.txt");
+    ifstream personalFile(username + today + "calories.txt");
     if (!personalFile.is_open())
     {
         fileProblem();
@@ -236,10 +236,12 @@ void recommendedCaloriesIntake()
     }
     else
     {
+        remove((username + "workouts.txt").c_str());
+        remove((username + "foods.txt").c_str());
         calories = recCal;
     }
     caloriesDataInVectors();
-    saveCalInFile(recCal);
+    saveCalInFile(calories);
     
     cout << "*1 kg body weight = 7700 cal!" << endl;
     cout << endl;
@@ -271,12 +273,15 @@ void dailyBalance()
     char answer = ' ';
     cin >> answer;
 
+    today = getCurrentDate();
+
     if (answer == 'f')
     {
         addFood();
         changeCal();
         displayFoods();
         displayWorkouts();
+        saveDataInFile();
         logOut();
         searchByDate();
         dailyBalance();
@@ -287,6 +292,7 @@ void dailyBalance()
         changeCal();
         displayFoods();
         displayWorkouts();
+        saveDataInFile();
         logOut();
         searchByDate();
         dailyBalance();

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-string username, password;
+string username, password, today;
 unsigned age, height, weight, recCal, calories, food, workout;
 char gender, plan, activity, goal;
 double bmr, velocity; 
@@ -97,6 +97,8 @@ int main()
 
 	//Settings
 	changes();
+
+	today = getCurrentDate();
 
 	//RecommendedCalories
 	recommendedCaloriesIntake();

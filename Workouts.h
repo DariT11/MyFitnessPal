@@ -14,7 +14,7 @@ string workoutName;
 
 void addWorkout()
 {
-    ofstream workoutFile("workouts.txt", ios::app);
+    ofstream workoutFile(username + "workouts.txt", ios::app);
 
     if (!workoutFile.is_open())
     {
@@ -47,7 +47,7 @@ void workoutDataInVector()
 
 void displayWorkouts()
 {
-    ifstream infile("workouts.txt");
+    ifstream infile(username + "workouts.txt");
 
     if (!infile.is_open())
     {
