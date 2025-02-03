@@ -76,11 +76,11 @@ int main()
     cout << "Let's get started!" << endl;
     cout << endl;
     
-	//Create the file 
+	//Create file to store users' usernames and passwords
 	ofstream outfile("accounts.txt", ios::app);
 	outfile.close();
 
-    //LogInOrSignIn
+    //LogInOrSignUp
     startForm();
 
     //Program
