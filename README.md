@@ -1,1 +1,1 @@
-<img src="" alt=""  width="200"/>
+<img src="images/fitnessImage.jpg" alt=""  width="200"/>
