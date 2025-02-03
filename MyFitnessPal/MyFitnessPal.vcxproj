@@ -130,11 +130,11 @@
     <ClCompile Include="MyFitnessPal.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Calendar.hpp" />
-    <ClInclude Include="CaloriesFun.hpp" />
-    <ClInclude Include="Food.hpp" />
-    <ClInclude Include="Register.hpp" />
-    <ClInclude Include="Workouts.hpp" />
+    <ClInclude Include="Calendar.h" />
+    <ClInclude Include="CaloriesFun.h" />
+    <ClInclude Include="Food.h" />
+    <ClInclude Include="Register.h" />
+    <ClInclude Include="Workouts.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
