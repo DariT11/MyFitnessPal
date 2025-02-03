@@ -7,7 +7,8 @@
 using namespace std;
 
 string username, password, today;
-unsigned age, height, weight, recCal, calories, food, workout;
+int calories;
+unsigned age, height, weight, recCal, food, workout;
 char gender, plan, activity, goal;
 double bmr, velocity; 
 

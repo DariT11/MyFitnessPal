@@ -119,7 +119,7 @@ unsigned defOrEx(double v)
     }
 }
 
-void saveCalInFile(unsigned cal)
+void saveCalInFile(int cal)
 {
     ofstream personalFile(username + today + "calories.txt");
     if (!personalFile.is_open())
