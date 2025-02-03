@@ -2,16 +2,6 @@
 
 string foodName;
 
-/*void createFoodFile()
-{
-    ofstream foodFile("foods.txt");
-
-    if (!foodFile.is_open())
-    {
-        fileProblem();
-    }
-}*/
-
 void addFood()
 {
     ofstream foodFile(username + "foods.txt", ios::app);
@@ -23,13 +13,14 @@ void addFood()
 
     cout << "Enter the name of the food: " << endl;
     cin >> foodName;
-    cout << "Enter calories per 100g: " << endl;
+    cout << "Enter calories: " << endl;
     cin >> food;
     if (food < 0)
     {
         invalidData();
         addFood();
     }
+
     foodFile << foodName << " " << food << endl;
     foodFile.close();
 
@@ -38,11 +29,6 @@ void addFood()
     cout << endl;
     cout << "The food has been successfully added!" << endl;  
     cout << endl;
-}
-
-void foodDataInVector()
-{
-    foods.push_back(food);
 }
 
 void displayFoods()
@@ -54,11 +40,11 @@ void displayFoods()
         return;
     }
 
-    cout << "List of foods and their calories per 100g:" << endl;
+    cout << "List of foods and their calories:" << endl;
 
     while (infile >> foodName >> food) 
     {
-        cout << "- " << foodName << ": " << food << " cal per 100g" << endl;
+        cout << " - " << foodName << ": " << food << " cals" << endl;
     }
 
     infile.close();

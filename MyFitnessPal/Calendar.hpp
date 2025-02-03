@@ -1,5 +1,5 @@
 #pragma once
-#include<string>
+#include <string>
 #include <ctime>
 
 string getCurrentDate()
@@ -21,7 +21,7 @@ void saveDataInFile()
 		fileProblem();
 	}
 
-	file << "Recommended calories: " << recCal << "cals per day" << endl;
+	file << "Recommended calories: " << recCal << " cals per day" << endl;
 	file << "Daily balance: " << calories << " cals" << endl;
 
 	string line;
@@ -33,10 +33,10 @@ void saveDataInFile()
 	}
 	else 
 	{
-		file << "Food information: ";
+		file << "Food information: " << endl;
 		while (getline(foodFile, line))
 		{
-			file << line << endl;
+			file << " - " << line << endl;
 		}
 		foodFile.close();
 	}
@@ -48,10 +48,10 @@ void saveDataInFile()
 	}
 	else
 	{
-		file << "Workouts information: ";
+		file << "Workouts information: " << endl;
 		while (getline(workoutFile, line))
 		{
-			file << line << endl;
+			file << " - " << line << endl;
 		}
 		workoutFile.close();
 	}
@@ -83,6 +83,7 @@ void deleteFile(string date)
 	char answer = ' ';
 	cin >> answer;
 	cout << endl;
+
 	if (answer == 'y' || answer == 'Y')
 	{
 		remove((username + date + ".txt").c_str());
@@ -117,6 +118,7 @@ void searchByDate()
 		cout << "Enter date: (YYYY-MM-DD)" << endl;
 		string date = " ";
 		cin >> date;
+		cout << endl;
 		readFile(date);
 		cout << endl;
 		deleteFile(date);
@@ -124,7 +126,7 @@ void searchByDate()
 	else if (answer == 'n' || answer == 'N')
 	{
 		cout << endl;
-		cout << "Alrigth! Let's continue!" << endl;
+		cout << "Alright! Let's continue!" << endl;
 		cout << endl;
 		return;
 	}

@@ -2,16 +2,6 @@
 
 string workoutName;
 
-/*void createWorkoutFile()
-{
-    ofstream workoutFile("workouts.txt");
-
-    if (!workoutFile.is_open())
-    {
-        fileProblem();
-    }
-}*/
-
 void addWorkout()
 {
     ofstream workoutFile(username + "workouts.txt", ios::app);
@@ -28,6 +18,7 @@ void addWorkout()
     if (workout < 0)
     {
         invalidData();
+        addWorkout();
     }
 
     workoutFile << workoutName << " " << workout << endl;
@@ -36,13 +27,8 @@ void addWorkout()
     calories += workout;
 
     cout << endl;
-    cout << "The workout  has been successfully added!" << endl;
+    cout << "The workout has been successfully added!" << endl;
     cout << endl;
-}
-
-void workoutDataInVector()
-{
-    workouts.push_back(workout);
 }
 
 void displayWorkouts()
@@ -54,11 +40,11 @@ void displayWorkouts()
         return;
     }
 
-    cout << "List of workouts and calories burned per session:" << endl;
+    cout << "List of workouts and calories burned per sessions:" << endl;
 
     while (infile >> workoutName >> workout)
     {
-        cout << "- " << workoutName << ": " << workout << " cal burned" << endl;
+        cout << " - " << workoutName << ": " << workout << " cals burned" << endl;
     }
 
     infile.close();

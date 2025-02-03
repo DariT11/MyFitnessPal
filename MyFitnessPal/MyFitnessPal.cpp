@@ -11,23 +11,6 @@ unsigned age, height, weight, recCal, calories, food, workout;
 char gender, plan, activity, goal;
 double bmr, velocity; 
 
-//Create vector for each global variable
-vector<string> usernames;
-vector<string> passwords;
-vector<unsigned> ages;
-vector<unsigned> heights;
-vector<unsigned> weights;
-vector<unsigned> recCals;
-vector<unsigned> dailyCalories;
-vector<unsigned> foods;
-vector<unsigned> workouts;
-vector<char> genders;
-vector<char> plans;
-vector<char> activities;
-vector<char> goals;
-vector<double> bmrValues;
-vector<double> velocities;
-
 void invalidData()
 {
     cout << "Invalid input! Try again!" << endl;
@@ -83,20 +66,22 @@ int main()
     //LogInOrSignUp
     startForm();
 
-    //Program
+    //Display users'data
     displayAccountData();
 
-	//LogOutOpp
+	//Log out option
 	logOut();
 
-	//Settings
+	//This function gives the user the chance to change
+	//their physical data, activity, and goals 
 	changes();
 
+	//Set current date
 	today = getCurrentDate();
 
-	//RecommendedCalories
+	//Display recommended calories
 	recommendedCaloriesIntake();
 
-	//DailyBalance
+	//Display daily balance and add food or workout
 	dailyBalance();
 }

@@ -139,46 +139,35 @@ void choosePlan()
     }
 }
 
-void dataInVectors()
-{
-    usernames.push_back(username);
-    passwords.push_back(password);
-    ages.push_back(age);
-    genders.push_back(gender);
-    heights.push_back(height);
-    weights.push_back(weight);
-    activities.push_back(activity);
-    goals.push_back(goal);
-    plans.push_back(plan);
-    velocities.push_back(velocity);
-}
-
-void signIn()
+void signUp()
 {
     cout << "Enter username: (At least 4 characters and no more than 20 characters)" << endl;
     cin >> username;
-    if (username.length() < 3 || username.length() > 20)
+
+    if (username.length() < 4 || username.length() > 20)
     {
         invalidData();
-        signIn();
+        signUp();
     }
     if (accountExists())
     {
-        cout << "This username already exist! Try again!" << endl;
-        signIn();
+        cout << "This username already exists! Try again!" << endl;
+        signUp();
     }
 
     cout << "Enter password: (Between 8 and 15 characters)" << endl;
     cin >> password;
+
     if (password.length() < 8 || password.length() > 15)
     {
         invalidData();
-        signIn();
+        signUp();
     }
 
     cout << endl;
     cout << "Now let's make your physical profile! " << endl;
     cout << endl;
+
     enterAge();
     enterGender();
     enterHeight();
@@ -198,8 +187,7 @@ void signIn()
     {
         fileProblem();
     }
-    outfile << username << " " << password << " " << age << " " << gender << " " << height << " "
-        << weight << " " << activity << " " << goal << " " << plan << " " << velocity << endl;
+    outfile << username << " " << password << endl;
 
     ofstream personalFile(username + ".txt", ios::app);
     if (!personalFile.is_open())
@@ -208,8 +196,6 @@ void signIn()
     }
     personalFile << username << " " << password << " " << age << " " << gender << " " << height << " "
         << weight << " " << activity << " " << goal << " " << plan << " " << velocity;
-
-    dataInVectors();
 
     cout << "Your account is registered!" << endl;
     cout << endl;
@@ -246,6 +232,7 @@ void logIn()
     cout << "Password: " << endl;
     cin >> password;
     cout << endl;
+
     if (corectLogIn())
     {
         cout << "Welcome back!" << endl;
@@ -261,16 +248,18 @@ void logIn()
 
 void startForm()
 {
-    cout << "Log in(l), Sign in(s) or Exit(e): " << endl;
+    cout << "Log in(l), Sign up(s) or Exit(e): " << endl;
     char answer = ' ';
     cin >> answer;
+    cout << endl;
+
     if (answer == 'l' || answer == 'L')
     {
         logIn();
     }
     else if (answer == 's' || answer == 'S')
     {
-        signIn();
+        signUp();
     }
     else if (answer == 'e' || answer == 'E')
     {
@@ -284,18 +273,6 @@ void startForm()
         cout << endl;
         startForm();
     }
-}
-
-int findTheIndexForVectors(string username)
-{
-    for (int i = 0; i <= usernames.size(); i++)
-    {
-        if (usernames[i] == username)
-        {
-            return i;
-        }
-    }
-    return -1;
 }
 
 void displayAccountData()
@@ -343,6 +320,7 @@ void changes()
     cout << "Do you want to make changes to your personal data? (y/n)" << endl;
     char change = ' ';
     cin >> change;
+
     if (change == 'y')
     {
         cout << endl;
@@ -354,14 +332,16 @@ void changes()
         cout << "5 - activity" << endl;
         cout << "6 - goal" << endl;
         cout << "7 - plan" << endl;
+        cout << "Enter number: ";
         unsigned answer = 0;
         cin >> answer;
-        if (answer < 1 && answer > 7)
+        if (answer < 1 || answer > 7)
         {
             invalidData();
             changes();
         }
-        
+        cout << endl;
+
         ifstream infile(username + ".txt");
         string u, p;
         unsigned a, h, w;
@@ -466,7 +446,6 @@ void changes()
         personalFile << username << " " << password << " " << age << " " << gender << " " << height << " "
             << weight << " " << activity << " " << goal << " " << plan << " " << velocity;
 
-        dataInVectors();
         personalFile.close();
 
         cout << endl;

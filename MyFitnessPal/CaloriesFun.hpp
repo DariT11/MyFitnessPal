@@ -94,9 +94,9 @@ unsigned carbsGrams(char go, unsigned cals)
 
 void displayMacros(unsigned pC, unsigned fC, unsigned cC, unsigned pG, unsigned fG, unsigned cG)
 {
-    cout << "Protein: " << pC << " cal and " << pG << " g" << endl;
-    cout << "Fat: " << fC << " cal and " << fG << " g" << endl;
-    cout << "Carbs: " << cC << " cal and " << cG << " g" << endl;
+    cout << "Protein: " << pC << " cals and " << pG << " g" << endl;
+    cout << "Fat: " << fC << " cals and " << fG << " g" << endl;
+    cout << "Carbs: " << cC << " cals and " << cG << " g" << endl;
 }
 
 unsigned defOrEx(double v)
@@ -117,13 +117,6 @@ unsigned defOrEx(double v)
     {
         return 1100;
     }
-}
-
-void caloriesDataInVectors()
-{
-    recCals.push_back(recCal);
-    dailyCalories.push_back(calories);
-    bmrValues.push_back(bmr);
 }
 
 void saveCalInFile(unsigned cal)
@@ -240,7 +233,6 @@ void recommendedCaloriesIntake()
         remove((username + "foods.txt").c_str());
         calories = recCal;
     }
-    caloriesDataInVectors();
     saveCalInFile(calories);
     
     cout << "*1 kg body weight = 7700 cal!" << endl;
@@ -250,7 +242,7 @@ void recommendedCaloriesIntake()
     {
         cout << "Warning:"
             << "This recommended calorie intake is tailored to your goals"
-            << " but it may not be safe for your health." << endl;
+            << " but it may not be good for your health." << endl;
         cout << endl;
         changes();
         recommendedCaloriesIntake();
@@ -267,11 +259,12 @@ void changeCal()
 void dailyBalance()
 {
     cout << "Recommended calories: " << recCal << endl;
-    cout << "Daily Balance: " << calories << " " << endl;
+    cout << "Daily balance: " << calories << endl;
     cout << endl;
     cout << "Do you want to add food or workout: (f - food/w - workout/e - exit)" << endl;
     char answer = ' ';
     cin >> answer;
+    cout << endl;
 
     today = getCurrentDate();
 
@@ -281,6 +274,7 @@ void dailyBalance()
         changeCal();
         displayFoods();
         displayWorkouts();
+        cout << endl;
         saveDataInFile();
         logOut();
         searchByDate();
@@ -292,6 +286,7 @@ void dailyBalance()
         changeCal();
         displayFoods();
         displayWorkouts();
+        cout << endl;
         saveDataInFile();
         logOut();
         searchByDate();
