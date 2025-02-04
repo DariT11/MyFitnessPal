@@ -20,19 +20,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Register.h">
+    <ClInclude Include="Register.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CaloriesFun.h">
+    <ClInclude Include="CaloriesFun.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Food.h">
+    <ClInclude Include="Food.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Workouts.h">
+    <ClInclude Include="Workouts.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Calendar.h">
+    <ClInclude Include="Calendar.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
