@@ -1,3 +1,18 @@
+/**
+*
+* Solution to course project # 9
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2024/2025
+*
+* @author Darina Todorova
+* @idnumber 4MI0600501
+* @compiler VC
+*
+* File with functions with calories , recommended caloric intake and daily balance
+
+*/
+
 #pragma once
 
 double bmrCal(char g, unsigned w, unsigned h, unsigned a)
@@ -137,7 +152,7 @@ unsigned readCalFromFile()
     {
         fileProblem();
     }
-    unsigned cal = 0;
+    int cal = 0;
     personalFile >> cal;
     personalFile.close();
 
